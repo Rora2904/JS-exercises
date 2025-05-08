@@ -64,7 +64,7 @@
     <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
     <script type="text/javascript">
 
-        var requestUrl = "TODO"
+        var requestUrl = "https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Non_Alcoholic"
 
         d3.json(requestUrl).then(function(data){
             console.log("DATA:", data)
@@ -72,13 +72,38 @@
 
             console.log("---------------------")
             console.log("PART 1...")
-
-
+            console.log("Number of drinks:", data.drinks.length)
+            console.log("Drinks:")
+            data.drinks.forEach(function(drink){
+                console.log(drink.strDrink, ":", drink.idDrink)
+            })
 
 
 
             console.log("---------------------")
             console.log("PART 2...")
+            // Display the number of drinks
+            numberOfDrinks = document.getElementById("display-drinks-count")
+            numberOfDrinks.innerHTML = data.drinks.length
+            console.log("Number of drinks:", numberOfDrinks.innerHTML)
+            // Loop through the drinks and display the name and image
+            var drinksDiv = document.getElementById("display-drinks")
+            data.drinks.forEach(function(drink){
+                // Create a new div for each drink
+                var drinkDiv = document.createElement("div")
+                // Create a p tag for the drink name
+                var drinkName = document.createElement("p")
+                drinkName.innerHTML = drink.strDrink
+                // Create an img tag for the drink image
+                var drinkImage = document.createElement("img")
+                drinkImage.src = drink.strDrinkThumb
+                drinkImage.height = 100
+                // Append the p and img tags to the drink div
+                drinkDiv.appendChild(drinkName)
+                drinkDiv.appendChild(drinkImage)
+                // Append the drink div to the drinks div
+                drinksDiv.appendChild(drinkDiv)
+            })
 
 
 

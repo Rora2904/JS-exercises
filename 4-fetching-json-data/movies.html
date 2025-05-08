@@ -85,17 +85,58 @@
 
                 console.log("---------------------")
                 console.log("PART 1...")
-
-
-
-
+                // B. Display the number of movies
+                console.log("Number of movies: " + data.length)
+                // C. Loop through the movies, and display the title and year of each movie.
+                data.forEach(movie => {
+                    console.log("Title: " + movie.Title)
+                    console.log("Year: " + movie.Year)
+                    console.log("----------------------")
+                })
+                // D. Perform a sorting operation to identify the movie with the highest rating.
+                //deep copy the data array
+                var sorted_data = JSON.parse(JSON.stringify(data))
+                sorted_data.sort((a, b) => {
+                    return b.Rating - a.Rating
+                })
+                var highestRatedMovie = sorted_data[0]
+                console.log("----------------------------------------")
+                console.log("Highest rated movie: " + sorted_data[0].Title)
+                console.log("Rating: " + highestRatedMovie.Rating)
 
 
                 console.log("---------------------")
                 console.log("PART 2...")
-
-
-
+                // A. Loop through the movies and dynamically create a new <option> element for each movie.
+                var selectMovie = document.getElementById("select-movie")
+                data.forEach(movie => {
+                    var option = document.createElement("option")
+                    option.value = movie.Id
+                    option.innerText = movie.Title
+                    selectMovie.appendChild(option)
+                })
+                // B. Create a function called updateMovieInfo.
+                // It should identify which movie is currently selected from the dropdown menu,
+                // then lookup the corresponding movie information using a find operation,
+                // and finally display information about that movie in the designated areas below.
+                function updateMovieInfo() {
+                    var selectedMovieId = selectMovie.value
+                    var selectedMovie = data.find(movie => movie.Id == selectedMovieId)
+                    console.log("Selected movie: " + selectedMovie.Title)
+                    // Display the movie title, year, rating, and an image of the movie poster.
+                    document.getElementById("display-title").innerText = selectedMovie.Title
+                    document.getElementById("display-year").innerText = selectedMovie.Year
+                    document.getElementById("display-rating").innerText = selectedMovie.Rating
+                    var imageContainer = document.getElementById("image-container")
+                    imageContainer.innerHTML = ""
+                    var img = document.createElement("img")
+                    // use the thumbnail image
+                    img.src = selectedMovie["Thumbnail Image URL"]
+                    imageContainer.appendChild(img)
+                }
+                // C. Add an event listener to the dropdown, such that when a new option is selected,
+                // it will invoke the updateMovieInfo function.
+                selectMovie.addEventListener("change", updateMovieInfo)
 
 
             })

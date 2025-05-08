@@ -72,7 +72,7 @@
     <script type="text/javascript">
 
         // AVOID HARD-CODING THE CREDENTIALS
-        // USE SESSION STORAGE TO MINIMIZE THE NUMBER OF TIMES WE HAVE TO PROVIDE THE CREDENTIAL
+        // LEVERGE SESSION STORAGE TO MINIMIZE THE NUMBER OF TIMES WE HAVE TO PROVIDE THE CREDENTIAL
         // check session storage for the API Key:
         var apiKey = sessionStorage.getItem("ALPHAVANTAGE_API_KEY")
         if (!apiKey) {
@@ -91,14 +91,55 @@
 
             console.log("---------------------")
             console.log("PART 1...")
-
-
-
+            console.log("Number of markets:", data.markets.length)
+            // Filter the markets to identify only those with market type of "Equity"
+            var equityMarkets = data.markets.filter(function(market) {
+                return market.market_type === "Equity"
+            })
+            console.log("Number of equity markets:", equityMarkets.length)
+            // Loop through the equity markets and display the market type and region of each
+            equityMarkets.forEach(function(market) {
+                console.log("Market Type:", market.market_type, "Region:", market.region)
+            })
+            // Use a find operation to identify the equity market with a region of "United States"
+            var market = equityMarkets.find(function(market) {
+                return market.region === "United States"
+            })
+            // Display information about the US market
+            // console.log("US Market:", market)
+            console.log("Market Type:", market.market_type)
+            console.log("Primary Exchanges:", market.primary_exchanges)
+            console.log("Local Open:", market.local_open)
+            console.log("Local Close:", market.local_close)
+            console.log("Current Status:", market.current_status.toUpperCase())
 
 
             console.log("---------------------")
             console.log("PART 2...")
-
+            // Display the region
+            var region = document.getElementById("display-region")
+            region.innerText = market.region
+            console.log("Region:", region.innerText)
+            // Display the market type
+            var type = document.getElementById("display-type")
+            type.innerText = market.market_type
+            console.log("Market Type:", type.innerText)
+            // Display the primary exchanges
+            var exchanges = document.getElementById("display-exchanges")
+            exchanges.innerText = market.primary_exchanges
+            console.log("Primary Exchanges:", exchanges.innerText)
+            // Display the local open time
+            var open = document.getElementById("display-open")
+            open.innerText = market.local_open
+            console.log("Local Open:", open.innerText)
+            // Display the local close time
+            var close = document.getElementById("display-close")
+            close.innerText = market.local_close
+            console.log("Local Close:", close.innerText)
+            // Display the current status
+            var status = document.getElementById("display-status")
+            status.innerText = market.current_status.toUpperCase()
+            console.log("Current Status:", status.innerText)
 
 
 

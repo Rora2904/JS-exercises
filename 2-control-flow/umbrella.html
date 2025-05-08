@@ -70,21 +70,66 @@
 
         console.log("---------------------")
         console.log("PART 1...")
-
+        // A. Model the concept of whether or not its raining in a variable called isRaining
+        var isRaining = true;
+        console.log("Is it raining? " + isRaining);
+        // B. Model the concept of whether or not the user owns an umbrella in a variable called ownsUmbrella
+        var ownsUmbrella = false;
+        console.log("Do you own an umbrella? " + ownsUmbrella);
+        // C. Write an "if" statement to provide instructions to the user depending on the values of these variables
+        if (!isRaining) {
+            console.log("Skies are clear");
+        } else {
+            if (ownsUmbrella) {
+                console.log("Bring your umbrella");
+            } else {
+                console.log("Buy an umbrella");
+            }
+        }
 
 
 
 
         console.log("---------------------")
         console.log("PART 2...")
-
+        // A. Write a function called advise that encapsulates the logic from Part 1
+        function advise(isRaining, ownsUmbrella) {
+            if (!isRaining) {
+                return "Skies are clear";
+            } else {
+                if (ownsUmbrella) {
+                    return "Bring your umbrella";
+                } else {
+                    return "Buy an umbrella";
+                }
+            }
+        }
+        // B. Invoke the function four different times using different combinations of boolean values for isRaining and ownsUmbrella
+        console.log(advise(true, true));
+        console.log(advise(true, false));
+        console.log(advise(false, true));
+        console.log(advise(false, false));
+        
 
 
 
 
         console.log("---------------------")
         console.log("PART 3...")
-
+        // A. Get references to the check box inputs and "Advise" button
+        var switchRaining = document.getElementById("switch-raining");
+        var switchUmbrella = document.getElementById("switch-umbrella");
+        var buttonAdvise = document.getElementById("advise");
+        var displayMessage = document.getElementById("display-message");
+        // B. Write JavaScript code to respond to button click events
+        buttonAdvise.addEventListener("click", function() {
+            // C. When the button is clicked, the program should determine the appropriate message
+            var isRaining = switchRaining.checked;
+            var ownsUmbrella = switchUmbrella.checked;
+            var message = advise(isRaining, ownsUmbrella);
+            // D. Finally then display the resulting message in the designated span element
+            displayMessage.innerHTML = message;
+        });
 
 
 

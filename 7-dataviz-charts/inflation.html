@@ -30,7 +30,7 @@
             <li>Display the name of this dataset (i.e. "Inflation - US Consumer Prices").</li>
             <li>Display the time frequency of this dataset (i.e. "annual").</li>
             <li>Display the number of datapoints provided. (i.e. 65).</li>
-            <li>Display the time range (earliest and latest date) of available data (i.e. "1960-01-01" to "2024-01-01".</li>
+            <li>Display the time range (earliest and latest date) of available data (i.e. "1960-01-01" to "2024-01-01").</li>
             <li>Display the average, min, and max inflation rate (using all available data).</li>
             <li>Display the average, min, and max inflation rate (over the past ten years only).
                 <strong>NOTE:</strong> it's sufficient to just take the first twelve datapoints using an array slicing approach.
@@ -68,7 +68,7 @@
         }
 
         // AVOID HARD-CODING THE CREDENTIALS
-        // USE SESSION STORAGE TO MINIMIZE THE NUMBER OF TIMES WE HAVE TO PROVIDE THE CREDENTIAL
+        // LEVERAGE SESSION STORAGE TO MINIMIZE THE NUMBER OF TIMES WE HAVE TO PROVIDE THE CREDENTIAL
         // check session storage for the API Key:
         var apiKey = sessionStorage.getItem("ALPHAVANTAGE_API_KEY")
         if (!apiKey) {

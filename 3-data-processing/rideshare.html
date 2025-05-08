@@ -86,15 +86,45 @@
 
         console.log("---------------------")
         console.log("PART 1...")
-
-
-
-
+        // A. Display a human-friendly message to denote the driver's first name
+        console.log("Your driver is " + trip.driver.first_name)
+        // B. Display the license plate number
+        console.log(trip.vehicle.licensePlate)
+        // C. Display the number of stops this trip makes
+        console.log("Number of stops: " + trip.stops.length)
+        // D. Display the destination of the first stop
+        console.log("First stop destination: " + trip.stops[0].destination)
+        // E. Display the destination of the last stop
+        console.log("Last stop destination: " + trip.stops[trip.stops.length - 1].destination)
+        // F. Loop through each of the stops and display that stop's passenger name
+        console.log("Passenger names:")
+        trip.stops.forEach(function(stop) {
+            console.log(stop.passenger)
+        })
+        // G. Use a mapping operation to arrive at an array of just the numeric fare values
+        var fares = trip.stops.map(function(stop) {
+            return stop.fare
+        })
+        console.log("Fares: " + fares)
+        // H. Calculate and display the total fare for the entire trip
+        var totalFare = d3.sum(fares)
+        console.log("Total fare: $" + totalFare.toFixed(2))
 
         console.log("---------------------")
         console.log("PART 2...")
-
-
+        // A. Display the driver's first name
+        var driver = document.getElementById("display-driver")
+        driver.innerText = trip.driver.first_name
+        // B. Display the vehicle's make, model, and license plate number
+        var vehicle = document.getElementById("display-vehicle")
+        vehicle.innerText = trip.vehicle.make + " " + trip.vehicle.model + " " + trip.vehicle.licensePlate
+        // C. Loop through each of the stops and display the respective stop's passenger name
+        var passengers = document.getElementById("display-passengers")
+        trip.stops.forEach(function(stop) {
+            var li = document.createElement("li")
+            li.innerText = stop.passenger
+            passengers.appendChild(li)
+        })
 
 
 

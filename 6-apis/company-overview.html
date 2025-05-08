@@ -76,7 +76,7 @@
     <script type="text/javascript">
 
         // AVOID HARD-CODING THE CREDENTIALS
-        // USE SESSION STORAGE TO MINIMIZE THE NUMBER OF TIMES WE HAVE TO PROVIDE THE CREDENTIAL
+        // LEVERAGE SESSION STORAGE TO MINIMIZE THE NUMBER OF TIMES WE HAVE TO PROVIDE THE CREDENTIAL
         // check session storage for the API Key:
         var apiKey = sessionStorage.getItem("ALPHAVANTAGE_API_KEY")
         if (!apiKey) {
@@ -90,6 +90,8 @@
 
         // FUNCTION DEFINITION
         function lookupCompany() {
+            // get the input element:
+            var inputSymbol = document.getElementById("input-symbol")
             var symbol = inputSymbol.value
             console.log("SYMBOL:", symbol)
 
@@ -99,7 +101,9 @@
 
                 console.log("---------------------")
                 console.log("PART 1...")
-
+                console.log("Company Name:", data.Name)
+                console.log("Company Description:", data.Description)
+                console.log("Company Website:", data.OfficialSite)
 
 
 
@@ -107,7 +111,18 @@
 
                 console.log("---------------------")
                 console.log("PART 2...")
-
+                // Display the company's name
+                var name = document.getElementById("display-name")
+                name.innerHTML = data.Name
+                console.log("Company Name:", name.innerHTML)
+                // Display the company's description
+                var description = document.getElementById("display-description")
+                description.innerHTML = data.Description
+                console.log("Company Description:", description.innerHTML)
+                // Display the company's website
+                var link = document.getElementById("display-link")
+                link.innerHTML = data.OfficialSite
+                link.href = data.OfficialSite
 
 
 
@@ -119,9 +134,10 @@
 
         // FUNCTION INVOCATIONS
         // invoke function when the page loads:
-        //lookupCompany()
+        lookupCompany()
         // invoke function when button is clicked:
-        //lookupButton.addEventListener("click", lookupCompany, false)
+        var lookupButton = document.getElementById("lookup")
+        lookupButton.addEventListener("click", lookupCompany, false)
 
     </script>
 </body>
